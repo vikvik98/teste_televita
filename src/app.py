@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from department.views import *
+from collaborator.views import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_db.db'
@@ -12,7 +13,10 @@ def create_db():
 
 api = Api(app)
 api.add_resource(DepartmentView, '/departments/')
+api.add_resource(CollaboratorView, '/collaborator/')
 api.add_resource(DepartmentDetailView, '/departments/<int:id>/')
+api.add_resource(CollaboratorDetailView, '/collaborator/<int:id>/')
+api.add_resource(CollaboratorDependentView, '/collaborator/<int:id>/dependents/<int:dependent_id>/')
 
 
 

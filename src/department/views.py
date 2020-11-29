@@ -4,7 +4,7 @@ from flask_restful import Resource, reqparse
 class DepartmentView(Resource):
 
     args = reqparse.RequestParser()
-    args.add_argument('id')
+    args.add_argument('id', type=int, required=True, help="The field 'id' cannot be left blank")
     args.add_argument('name')
 
     def get(self):

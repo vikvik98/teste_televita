@@ -2,10 +2,11 @@ from dao.sql_alchemy import db
 
 
 class Department(db.Model):
-    __tablename__ = "department"
+    __tablename__ = "departments"
 
     id = db.Column(db.INTEGER, primary_key=True)
     name = db.Column(db.String(200))
+    collaborators = db.relationship('Collaborator')
 
     def __init__(self, id, name):
         self.id = id
@@ -14,7 +15,8 @@ class Department(db.Model):
     def json(self):
         return {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "collaborators": [collaborator.json() for collaborator in self.collaborators]
         }
 
     @classmethod
